@@ -1,0 +1,19 @@
+{
+  "name": "pyes",
+  "version": "1.0.0",
+  "description": "Running Python in JS",
+  "main": "index.js",
+  "author": "Marco Concetto Rudilosso",
+  "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  },
+  "transform": {},
+  "dependencies": {
+    "web-worker": "^1.2.0"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
+}
