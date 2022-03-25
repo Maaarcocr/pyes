@@ -3,7 +3,7 @@ import PythonInterpreter from './pythonInterpreter.js';
 export const pythonFunction = (funcName, funcBody) => {
   const interpreter = new PythonInterpreter();
   interpreter.stdin.put(funcBody+"\n")
-  return async (args) => {
+  return [async (args) => {
     let argsJson = JSON.stringify(args)
     let pythonCode = `import json
 args = json.loads("""${argsJson}""")
@@ -17,5 +17,5 @@ print(json.dumps({"result": ${funcName}(args)}))
         return JSON.parse(line)["result"]
       } catch {}
     }
-  }
+  }, interpreter.stopWorker]
 }

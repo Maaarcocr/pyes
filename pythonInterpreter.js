@@ -19,6 +19,10 @@ class PythonInterpreter {
     this.worker.addEventListener('message', this.handleEvent);
   }
 
+  stopWorker = () => {
+    this.worker.terminate()
+  }
+
   handleStdinData = (inputValue) => {
     if (this.stdinbuffer && this.stdinbufferInt) {
       let startingIndex = 1
