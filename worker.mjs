@@ -29,7 +29,7 @@ var Module = {
   stdout: stdout,
   stderr: stderr,
   stdin: stdinBuffer.stdin,
-  arguments: ["-i", "-"],
+  arguments: ["-i", "-q", "-"],
   locateFile: function (path, scriptDir) { return scriptDir + path; }
 }
 
