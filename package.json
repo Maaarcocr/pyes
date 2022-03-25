@@ -4,6 +4,7 @@
   "description": "Running Python in JS",
   "main": "index.js",
   "author": "Marco Concetto Rudilosso",
+  "homepage": "https://github.com/Maaarcocr/pyes",
   "license": "ISC",
   "type": "module",
   "scripts": {
