@@ -38,4 +38,4 @@ if (typeof fetch === 'undefined') {
   await import('module').then(module => globalThis.require = module.createRequire(import.meta.url));
 }
   
-await Python(Module);
+Python(Module);
