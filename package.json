@@ -1,6 +1,6 @@
 {
   "name": "pyes",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Running Python in JS",
   "main": "index.js",
   "author": "Marco Concetto Rudilosso",
