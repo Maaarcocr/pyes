@@ -1,5 +1,5 @@
 import StdinBuffer from './stdinBuffer.js'
-import Python from './python.mjs';
+import Python from './python.js';
 
 const stdout = (charCode) => {
   if (charCode) {

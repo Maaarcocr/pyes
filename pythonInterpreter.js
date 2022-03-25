@@ -4,7 +4,7 @@ import Channel from './channel.js';
 class PythonInterpreter {
   constructor() {
     this.worker = new Worker(
-      new URL('./worker.mjs', import.meta.url).href,
+      new URL('./worker.js', import.meta.url).href,
       { type: 'module' }
     );
     this.stdin = new Channel();
