@@ -1,12 +1,13 @@
 {
   "name": "pyes",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Running Python in JS",
   "main": "index.js",
   "author": "Marco Concetto Rudilosso",
   "homepage": "https://github.com/Maaarcocr/pyes",
   "license": "ISC",
   "type": "module",
+  "types": "index.d.ts",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
