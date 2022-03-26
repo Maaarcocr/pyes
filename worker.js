@@ -1,9 +1,10 @@
+import {parentPort} from "worker_threads"
 import StdinBuffer from './stdinBuffer.js'
 import Python from './python.js';
 
 const stdout = (charCode) => {
   if (charCode) {
-      postMessage({
+      parentPort.postMessage({
           type: 'stdout',
           stdout: String.fromCharCode(charCode),
       })
@@ -14,7 +15,7 @@ const stdout = (charCode) => {
 
 const stderr = (charCode) => {
   if (charCode) {
-      postMessage({
+      parentPort.postMessage({
           type: 'stderr',
           stderr: String.fromCharCode(charCode),
       })
@@ -32,13 +33,14 @@ var Module = {
   arguments: ["-i", "-q", "-"],
   locateFile: function (path, scriptDir) { return scriptDir + path; }
 }
-
 if (typeof fetch === 'undefined') {
   const imports = [
     import('path').then(path => globalThis.__dirname = path.dirname(import.meta.url).substring(7)), 
     import('module').then(module => globalThis.require = module.createRequire(import.meta.url)),
   ]
-  Promise.all(imports).then(() => Python(Module))
+  Promise.all(imports).then(() => {
+    Python(Module)
+  })
 } else {
   Python(Module);
 }

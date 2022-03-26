@@ -1,6 +1,6 @@
 {
   "name": "pyes",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Running Python in JS",
   "main": "index.js",
   "author": "Marco Concetto Rudilosso",
@@ -12,9 +12,7 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "transform": {},
-  "dependencies": {
-    "web-worker": "^1.2.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "jest": "^27.5.1"
   }

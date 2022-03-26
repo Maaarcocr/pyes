@@ -1,11 +1,10 @@
-import Worker from 'web-worker';
+import { Worker } from 'worker_threads'
 import Channel from './channel.js';
 
 class PythonInterpreter {
   constructor() {
     this.worker = new Worker(
-      new URL('./worker.js', import.meta.url),
-      { type: 'module' }
+      new URL('./worker.js', import.meta.url)
     );
     this.stdin = new Channel();
     this.stderrBuffer = '';
@@ -16,7 +15,8 @@ class PythonInterpreter {
   }
 
   initialiseWorker = () => {
-    this.worker.addEventListener('message', this.handleEvent);
+    this.worker.on('message', this.handleEvent);
+    this.worker.on('error', (e) => { throw e })
   }
 
   stopWorker = () => {
@@ -40,34 +40,34 @@ class PythonInterpreter {
   }
 
   handleEvent = (e) => {
-    const type = e.data.type
+    const type = e.type
     switch (type) {
       case "stderr":
-        if (e.data.stderr == '\n') {
+        if (e.stderr == '\n') {
           console.log(this.stderrBuffer)
           this.stderr.put(this.stderrBuffer)
           this.stderrBuffer = ''
         }
         else {
-          this.stderrBuffer += e.data.stderr
+          this.stderrBuffer += e.stderr
         }
         break;
       case "stdout":
-        if (e.data.stdout == '\n') {
+        if (e.stdout == '\n') {
           this.stdout.put(this.stdoutBuffer)
           this.stdoutBuffer = ''
         }
         else {
-          this.stdoutBuffer += e.data.stdout
+          this.stdoutBuffer += e.stdout
         }
         break;
       case "stdin":
-        this.stdinbuffer = e.data.buffer;
+        this.stdinbuffer = e.buffer;
         this.stdinbufferInt = new Int32Array(this.stdinbuffer)
         this.stdin.take().then(value => this.handleStdinData(value))
         break;
       default:
-        console.log(e.data)
+        console.log(e)
     }
   }
 }

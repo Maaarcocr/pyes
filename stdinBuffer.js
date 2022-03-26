@@ -1,3 +1,5 @@
+import {parentPort} from "worker_threads"
+
 class StdinBuffer {
     constructor() {
         this.sab = new SharedArrayBuffer(128 * Int32Array.BYTES_PER_ELEMENT)
@@ -10,7 +12,7 @@ class StdinBuffer {
     prompt() {
         this.readIndex = 1
         Atomics.store(this.buffer, 0, -1)
-        postMessage({
+        parentPort.postMessage({
             type: 'stdin',
             buffer: this.sab
         })
