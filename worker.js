@@ -34,8 +34,12 @@ var Module = {
 }
 
 if (typeof fetch === 'undefined') {
-  await import('path').then(path => globalThis.__dirname = path.dirname(import.meta.url).substring(7));
-  await import('module').then(module => globalThis.require = module.createRequire(import.meta.url));
+  const imports = [
+    import('path').then(path => globalThis.__dirname = path.dirname(import.meta.url).substring(7)), 
+    import('module').then(module => globalThis.require = module.createRequire(import.meta.url)),
+  ]
+  Promise.all(imports).then(() => Python(Module))
+} else {
+  Python(Module);
 }
   
-Python(Module);
