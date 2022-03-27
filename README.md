@@ -5,7 +5,7 @@ pyes is an ES module that allows you to run python from JavaScript
 # Example
 
 ```js
-import { pythonFunction } from "pyes"
+import { pythonFunction, PythonInterpreter } from "pyes"
 
 const addBody = `
 def add_impl(a, b):
@@ -15,9 +15,12 @@ def add(args):
   return add_impl(args[0], args[1])
 `
 
-const [add, stopWorker] = pythonFunction("add", addBody)
+const onReady = () => {console.log("Now the interpreter is ready")}
+const interpreter = new PythonInterpreter(onReady);
+
+const add = pythonFunction(interpreter, "add", addBody)
 console.log(await add([1,2]));
-stopWorker()
+interpreter.stop()
 ```
 
 # How it works

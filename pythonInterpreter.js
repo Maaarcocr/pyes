@@ -68,6 +68,7 @@ class PythonInterpreter {
         break;
       case "ready":
         this.onReady()
+        break;
       default:
         console.log(e)
     }
