@@ -41,6 +41,9 @@ var Module = {
   stderr: stderr,
   stdin: stdinBuffer.stdin,
   arguments: ["-i", "-q", "-"],
+  onRuntimeInitialized: () => {
+    parentPort.postMessage({type: 'ready', stdinBuffer: stdinBuffer.sab})
+  },
 }
 if (typeof fetch === 'undefined') {
   globalThis.self = {}

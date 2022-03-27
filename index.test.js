@@ -1,4 +1,4 @@
-import { pythonFunction } from "./index.js"
+import { pythonFunction, PythonInterpreter } from "./index.js"
 
 const addBody = `
 def add_impl(a, b):
@@ -13,15 +13,18 @@ def run(a):
   return True is False
 `
 
+const interpreter = new PythonInterpreter();
 
 test('adds 1 + 2 to equal 3', async () => {
-  const [add, stopWorker] = pythonFunction("add", addBody)
+  const add = pythonFunction(interpreter, "add", addBody)
   expect(await add([1,2])).toBe(3);
-  stopWorker()
 });
 
 test('true is not false', async () => {
-  const [run, stopWorker] = pythonFunction("run", testFromWil)
+  const run = pythonFunction(interpreter, "run", testFromWil)
   expect(await run({})).toBe(false);
-  stopWorker()
+});
+
+afterAll(() => {
+  interpreter.stop()
 });
