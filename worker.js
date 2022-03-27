@@ -31,12 +31,11 @@ var Module = {
   stderr: stderr,
   stdin: stdinBuffer.stdin,
   arguments: ["-i", "-q", "-"],
-  locateFile: function (path, scriptDir) { return scriptDir + path; }
 }
 if (typeof fetch === 'undefined') {
   const imports = [
     import('path').then(path => globalThis.__dirname = path.dirname(import.meta.url).substring(7)), 
-    import('module').then(module => globalThis.require = module.createRequire(import.meta.url)),
+    import('module').then(modul => globalThis.require = modul.createRequire(import.meta.url)),
   ]
   Promise.all(imports).then(() => {
     Python(Module)
