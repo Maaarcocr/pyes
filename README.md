@@ -25,9 +25,9 @@ interpreter.stop()
 
 # How it works
 
-Every time you define a new Python function, pyes spins up a new web worker where a python interpreter is run.
-It feeds the function definition to the interpreter (which is run in interactive mode).
-When you call the JS function that you get back as the first element of the return value of `pythonFunction`, pyes
+Every time you define a new `PythonInterpreter`, pyes spins up a new web worker where a python interpreter is run. Then,
+when you define a function, it feeds the function definition to the interpreter (which is run in interactive mode).
+When you call the JS function that you get back the return value of `pythonFunction`, pyes
 encodes the argument you have passed as JSON and it then feeds some code to the python interpreter which:
 - parses the JSONified argument back into a python value using `json.loads`
 - calls your function with said parsed value
